@@ -1,0 +1,98 @@
+# Sīpa: transactional messages. Each works as email; `whatsapp` is the short form for WhatsApp updates.
+# Plain voice, one job per message, the registry number in every message about a piece.
+
+signInCode:
+  subject: Your Sīpa sign-in code
+  body: |
+    Your code is {code}. It works for 10 minutes.
+    If you didn't ask to sign in, you can ignore this message.
+  whatsapp: "Your Sīpa sign-in code is {code}. It works for 10 minutes."
+
+orderRecorded:
+  subject: "Recorded to you: {piece.title}"
+  preheader: "SĪPA · {registryId} is now yours."
+  body: |
+    {customer.firstName},
+
+    {piece.title} is recorded to you. Its registry number is SĪPA · {registryId}, and from today the record shows you as its owner.
+
+    {maker.name} made it in {place.name} over {piece.daysInHand} days. ₹{share.maker} of what you paid goes to {maker.firstName}'s workshop.
+
+    What happens next:
+    1. Export clearance. We take the piece for inspection so it can leave Nepal legally. This usually takes {{TODO: typical clearance days}} working days.
+    2. Packing. It is packed with its printed catalogue card and its care kit.
+    3. Shipping. You'll get a tracking link the day it leaves.
+
+    Your owner's record: {ownerRecordUrl}
+    Order {orderId} · {total}
+  whatsapp: "{piece.title} is recorded to you (SĪPA · {registryId}). We'll message you when it clears export and ships. Your record: {ownerRecordUrl}"
+
+exportCleared:
+  subject: "Cleared for export: {piece.title}"
+  body: |
+    {piece.title} has passed export inspection and is being packed with its catalogue card and care kit. We'll send tracking as soon as it ships.
+    Your clearance document is saved in your owner's record: {ownerRecordUrl}
+  whatsapp: "{piece.title} has cleared export inspection and is being packed."
+
+shipped:
+  subject: "On its way: {piece.title}"
+  body: |
+    {piece.title} left {{TODO: dispatch city}} today with {carrier}.
+    Tracking: {trackingUrl}
+    Expected delivery: {deliveryWindow}
+
+    {deliveryNotes}
+  deliveryNotes:
+    duties: "Import duties and taxes in your country are {{TODO: who pays duties: buyer on delivery, or included at checkout}}."
+  whatsapp: "{piece.title} has shipped with {carrier}. Track it: {trackingUrl}"
+
+delivered:
+  subject: "{maker.firstName} would like to hear from you"
+  preheader: Your piece has arrived. A note to its maker takes two minutes.
+  body: |
+    {customer.firstName},
+
+    {piece.title} should now be with you. Inside the box are its catalogue card and its care kit.
+
+    If you'd like, write a few lines to {maker.name}. Tell them where the piece lives now, or what it means to you. We translate your note into Nepali and read it to {maker.firstName} at the workshop.
+
+    Write to {maker.firstName}: {ownerRecordUrl}#note
+
+    Care starts with the steps on the care card. The care film is here: {careFilmUrl}
+  whatsapp: "{piece.title} should have arrived. Would you like to write a note to {maker.name}? We read it to them at the workshop: {ownerRecordUrl}#note"
+
+noteDelivered:
+  subject: "{maker.firstName} has heard your note"
+  body: |
+    We read your note to {maker.name} at the workshop on {deliveredDate}.
+    {replyLine}
+  replyLine:
+    withReply: "{maker.firstName} replied. Read it in your record: {ownerRecordUrl}#note"
+    noReply: Makers sometimes reply later, in their own time. If {maker.firstName} does, we'll let you know.
+  whatsapp: "We read your note to {maker.name} at the workshop today."
+
+makerReplied:
+  subject: "{maker.firstName} replied to your note"
+  body: |
+    {maker.name} replied to your note about {piece.title}:
+
+    {reply.ne}
+    "{reply.en}"
+
+    See the thread in your record: {ownerRecordUrl}#note
+
+careReminder:   # phase 2
+  subject: "Time to oil {piece.title}"
+  body: |
+    It has been {interval} since {piece.title} was last oiled. Here are the steps for {material}, from {maker.firstName}:
+    {careSteps}
+    Running low on oil? Reorder for this piece: {refillUrl}
+  whatsapp: "Time to oil {piece.title}. Steps and refills: {ownerRecordUrl}#care"
+
+transferOffered:   # phase 2
+  subject: "{from.firstName} is passing on {piece.title} to you"
+  body: |
+    {from.name} wants to record {piece.title} (SĪPA · {registryId}) to you as its next owner.
+    Accept to add it to your collection. The record keeps its full history, and your name shows only if you choose.
+    Accept: {acceptUrl}
+    This offer stays open for 14 days.

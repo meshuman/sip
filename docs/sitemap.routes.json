@@ -1,0 +1,132 @@
+{
+  "$comment": "Sīpa route manifest. The machine-readable twin of SITEMAP.md: keep both in sync. Paths use [param] for dynamic segments.",
+  "version": 1,
+  "site": {
+    "name": "Sīpa",
+    "nameStatus": "working name; every route below survives a rename",
+    "baseUrl": "https://sipa.example",
+    "defaultLocale": "en",
+    "locales": ["en", "ne"],
+    "localePrefix": { "en": "", "ne": "/ne" },
+    "designSystem": "https://claude.ai/artifact/KpC2uDSXtBdRQAqayuRHVb",
+    "registryId": {
+      "display": "SĪPA · PTN-MT-26-0142",
+      "inUrl": "ptn-mt-26-0142",
+      "pattern": "^[a-z]{3}-(mt|st|wd|tk|mh|pp)-[0-9]{2}-[0-9]{4}$",
+      "parts": ["region (3 letters)", "craft (2 letters)", "year finished (2 digits)", "serial (4 digits, never reused)"]
+    },
+    "pieceKey": {
+      "format": "{registryId}-{pieceSlug}",
+      "example": "ptn-mt-26-0142-shakyamuni-earth-touching",
+      "parse": "the first 15 characters are the registry id; the rest is the slug"
+    },
+    "urlRules": [
+      "lowercase, hyphenated, no trailing slash",
+      "registry ids are lowercase in URLs and uppercase on screen",
+      "a piece URL never dies: sold pieces stay live as provenance",
+      "filters and sorting use query parameters, are noindex and canonicalise to the unfiltered page",
+      "Nepali pages mirror English paths under /ne"
+    ]
+  },
+  "access": {
+    "public": "anyone",
+    "signed-in": "any signed-in person",
+    "owner": "the recorded owner of that registry id",
+    "order-owner": "the person who placed that order",
+    "staff": "Sīpa staff; studio roles: curator, field, fulfilment, admin"
+  },
+  "phases": {
+    "mvp": "launch",
+    "phase-2": "after launch: Nepali locale, refills, transfers, workshop visits, care reminders",
+    "phase-3": "later: trade"
+  },
+  "routes": [
+    { "id": "home", "path": "/", "name": "Home", "group": "gallery", "access": "public", "index": true, "phase": "mvp", "schema": ["Organization", "WebSite"], "share": "default", "components": ["ExhibitionHero", "CollectionRoom", "ArtisanByline", "MakersShare", "MakerNote", "PieceCard", "RegistrySeal"], "data": ["rooms(featured)", "pieces(featured)", "makers(featured)", "notes(public, latest)", "journal(latest)"], "primaryAction": "Enter the rooms" },
+
+    { "id": "rooms", "path": "/rooms", "name": "Rooms", "group": "gallery", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList", "BreadcrumbList"], "share": "default", "components": ["ChapterHeader", "CollectionRoom"], "data": ["rooms"] },
+    { "id": "room", "path": "/rooms/[roomSlug]", "name": "Room", "group": "gallery", "parent": "rooms", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList", "BreadcrumbList"], "share": "room", "components": ["CollectionRoom", "PieceCard", "ShareBar"], "data": ["room", "pieces(in room)"] },
+    { "id": "pieces", "path": "/pieces", "name": "All pieces", "group": "gallery", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList"], "share": "default", "components": ["PieceCard"], "data": ["pieces"], "query": ["room", "craft", "place", "maker", "material", "price", "status", "sort"] },
+    { "id": "commission", "path": "/commission", "name": "Request a piece", "group": "gallery", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader", "Button"], "data": ["crafts"], "primaryAction": "Send my request" },
+    { "id": "piece", "path": "/pieces/[pieceKey]", "name": "Piece", "group": "gallery", "parent": "room", "access": "public", "index": true, "phase": "mvp", "schema": ["Product", "Offer", "VisualArtwork", "VideoObject", "BreadcrumbList"], "share": "piece", "components": ["ExhibitionHero", "ObjectLabel", "RegistrySeal", "ShareBar", "Hotspot", "FilmFrame", "MakingTimeline", "ChapterHeader", "PlacementCompass", "CareKit", "ArtisanByline", "MakersShare", "MakerNote", "CatalogueCard", "PieceCard"], "data": ["piece", "maker", "place", "craft", "topics", "careKit", "media", "makingStages", "shareSplit", "notes(public, this maker)", "pieces(same room)"], "states": ["available", "reserved", "recorded", "withdrawn"], "primaryAction": "Make it yours" },
+
+    { "id": "makers", "path": "/makers", "name": "Makers", "group": "people-and-places", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList"], "share": "default", "components": ["ArtisanByline"], "data": ["makers"] },
+    { "id": "maker", "path": "/makers/[makerSlug]", "name": "Maker", "group": "people-and-places", "parent": "makers", "access": "public", "index": true, "phase": "mvp", "schema": ["ProfilePage", "Person", "VideoObject", "BreadcrumbList"], "share": "maker", "components": ["ArtisanByline", "FilmFrame", "MakersShare", "PieceCard", "MakerNote", "ShareBar"], "data": ["maker", "workshop", "place", "pieces(available)", "pieces(recorded)", "notes(public)", "payouts(total to date)"] },
+    { "id": "places", "path": "/places", "name": "Places", "group": "people-and-places", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList"], "share": "default", "components": ["ChapterHeader"], "data": ["places"] },
+    { "id": "place", "path": "/places/[placeSlug]", "name": "Place", "group": "people-and-places", "parent": "places", "access": "public", "index": true, "phase": "mvp", "schema": ["Place", "CollectionPage", "BreadcrumbList"], "share": "default", "components": ["ChapterHeader", "ArtisanByline", "CollectionRoom", "PieceCard"], "data": ["place", "makers(here)", "crafts(here)", "rooms(here)", "pieces(here)"] },
+
+    { "id": "crafts", "path": "/crafts", "name": "Crafts", "group": "learn", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList"], "share": "default", "components": ["ChapterHeader"], "data": ["crafts"] },
+    { "id": "craft", "path": "/crafts/[craftSlug]", "name": "Craft", "group": "learn", "parent": "crafts", "access": "public", "index": true, "phase": "mvp", "schema": ["Article", "DefinedTerm", "VideoObject", "BreadcrumbList"], "share": "default", "components": ["ChapterHeader", "MakingTimeline", "FilmFrame", "ArtisanByline", "PieceCard"], "data": ["craft", "makers(this craft)", "pieces(this craft)"] },
+    { "id": "meaning", "path": "/meaning", "name": "Meaning", "group": "learn", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage", "ItemList"], "share": "default", "components": ["ChapterHeader"], "data": ["topics"] },
+    { "id": "topic", "path": "/meaning/[topicSlug]", "name": "Meaning topic", "group": "learn", "parent": "meaning", "access": "public", "index": true, "phase": "mvp", "schema": ["Article", "DefinedTerm", "BreadcrumbList"], "share": "default", "components": ["ChapterHeader", "Hotspot", "PlacementCompass", "PieceCard"], "data": ["topic", "pieces(depicting it)"] },
+    { "id": "care", "path": "/care", "name": "Care guides", "group": "learn", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage"], "share": "default", "components": ["ChapterHeader", "CareNote"], "data": ["careGuides"] },
+    { "id": "careMaterial", "path": "/care/[material]", "name": "Care guide", "group": "learn", "parent": "care", "access": "public", "index": true, "phase": "mvp", "schema": ["HowTo", "VideoObject", "BreadcrumbList"], "share": "default", "components": ["ChapterHeader", "CareKit", "CareNote", "FilmFrame"], "data": ["careGuide"], "params": { "material": ["wood", "metal", "stone", "painted-cloth", "paper"] } },
+    { "id": "careRefills", "path": "/care/refills", "name": "Care refills", "group": "learn", "parent": "care", "access": "public", "index": true, "phase": "phase-2", "schema": ["Product", "Offer"], "share": "default", "components": ["CareKit", "PieceCard", "Button"], "data": ["refillProducts", "pieces(owned, if signed in)"], "primaryAction": "Add refill" },
+    { "id": "behind", "path": "/behind-the-scenes", "name": "Behind the scenes", "group": "learn", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["CollectionPage"], "share": "default", "components": ["ChapterHeader", "Button"], "data": ["behindStories"] },
+    { "id": "journal", "path": "/journal", "name": "Journal", "group": "learn", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["Blog"], "share": "default", "components": ["ChapterHeader", "PieceCard"], "data": ["journalPosts"] },
+    { "id": "journalPost", "path": "/journal/[postSlug]", "name": "Journal story", "group": "learn", "parent": "journal", "access": "public", "index": true, "phase": "mvp", "schema": ["Article", "VideoObject", "BreadcrumbList"], "share": "default", "components": ["ChapterHeader", "FilmFrame", "ArtisanByline", "PieceCard", "ShareBar"], "data": ["journalPost", "makers(mentioned)", "pieces(mentioned)"] },
+
+    { "id": "registry", "path": "/registry", "name": "Registry", "group": "record", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader", "RegistrySeal", "Button"], "data": [], "primaryAction": "Check a number" },
+    { "id": "record", "path": "/record/[registryId]", "name": "Provenance record", "group": "record", "parent": "registry", "access": "public", "ownerView": true, "index": false, "phase": "mvp", "schema": ["VisualArtwork"], "share": "record", "components": ["RegistrySeal", "ObjectLabel", "CatalogueCard", "MakerNote", "ShareBar"], "data": ["piece", "maker", "provenanceEvents", "owner(consented fields only)", "notes(public, this piece)"] },
+
+    { "id": "about", "path": "/about", "name": "Our promise", "group": "about", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["AboutPage", "Organization"], "share": "default", "components": ["ChapterHeader", "MakersShare", "RegistrySeal"], "data": [] },
+    { "id": "aboutHow", "path": "/about/how-we-work", "name": "How we work", "group": "about", "parent": "about", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader", "MakingTimeline", "CatalogueCard", "CareKit"], "data": [] },
+    { "id": "visit", "path": "/visit", "name": "Visit a workshop", "group": "about", "parent": "home", "access": "public", "index": true, "phase": "phase-2", "schema": ["ItemList", "TouristAttraction"], "share": "default", "components": ["ChapterHeader", "ArtisanByline", "Button"], "data": ["workshops(open to visitors)"], "primaryAction": "Ask to visit" },
+    { "id": "trade", "path": "/trade", "name": "For designers and hotels", "group": "about", "parent": "home", "access": "public", "index": true, "phase": "phase-3", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader", "CollectionRoom", "Button"], "data": [], "primaryAction": "Start a trade enquiry" },
+    { "id": "contact", "path": "/contact", "name": "Contact", "group": "about", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["ContactPage"], "share": "default", "components": ["ChapterHeader", "Button"], "data": [] },
+
+    { "id": "help", "path": "/help", "name": "Help", "group": "help", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader"], "data": [] },
+    { "id": "helpShipping", "path": "/help/shipping", "name": "Shipping", "group": "help", "parent": "help", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader"], "data": [] },
+    { "id": "helpReturns", "path": "/help/returns", "name": "Returns", "group": "help", "parent": "help", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader"], "data": [] },
+    { "id": "helpExport", "path": "/help/export-and-customs", "name": "Export and customs", "group": "help", "parent": "help", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader"], "data": [] },
+    { "id": "helpPayments", "path": "/help/payments", "name": "Payments", "group": "help", "parent": "help", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "default", "components": ["ChapterHeader"], "data": [] },
+    { "id": "helpFaq", "path": "/help/faq", "name": "Questions", "group": "help", "parent": "help", "access": "public", "index": true, "phase": "mvp", "schema": ["FAQPage"], "share": "default", "components": ["ChapterHeader"], "data": ["faqs"] },
+    { "id": "search", "path": "/search", "name": "Search", "group": "help", "parent": "home", "access": "public", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["PieceCard", "ArtisanByline"], "data": ["pieces", "makers", "topics", "crafts", "places"], "query": ["q"] },
+    { "id": "legalTerms", "path": "/legal/terms", "name": "Terms", "group": "legal", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "none", "components": [], "data": [] },
+    { "id": "legalPrivacy", "path": "/legal/privacy", "name": "Privacy", "group": "legal", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "none", "components": [], "data": [] },
+    { "id": "legalCookies", "path": "/legal/cookies", "name": "Cookies", "group": "legal", "parent": "home", "access": "public", "index": true, "phase": "mvp", "schema": ["WebPage"], "share": "none", "components": [], "data": [] },
+
+    { "id": "cart", "path": "/cart", "name": "Bag", "group": "buying", "parent": "home", "access": "public", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["PieceCard", "ObjectLabel", "Button"], "data": ["cart"], "primaryAction": "Continue to details" },
+    { "id": "checkout", "path": "/checkout", "name": "Checkout", "group": "buying", "parent": "cart", "access": "public", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["ObjectLabel", "CareKit", "Button"], "data": ["cart", "shippingRates", "exportRequirements"], "steps": ["details", "gift", "delivery", "payment", "review"], "primaryAction": "Pay and record it to me" },
+    { "id": "checkoutComplete", "path": "/checkout/complete/[orderId]", "name": "Recorded to you", "group": "buying", "parent": "checkout", "access": "order-owner", "index": false, "phase": "mvp", "schema": [], "share": "record", "components": ["RegistrySeal", "CatalogueCard", "CareKit", "MakerNote", "ShareCard", "ShareBar"], "data": ["order", "pieces(in order)", "maker"] },
+
+    { "id": "signIn", "path": "/account/sign-in", "name": "Sign in", "group": "owners", "parent": "home", "access": "public", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["Button"], "data": [] },
+    { "id": "account", "path": "/account", "name": "Your account", "group": "owners", "parent": "home", "access": "signed-in", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["PieceCard", "MakerNote", "RegistrySeal"], "data": ["owner", "pieces(owned)", "orders(open)", "notes(replies)"] },
+    { "id": "collection", "path": "/account/collection", "name": "Your collection", "group": "owners", "parent": "account", "access": "signed-in", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["PieceCard", "RegistrySeal"], "data": ["pieces(owned)"] },
+    { "id": "ownedPiece", "path": "/account/collection/[registryId]", "name": "Owner's record", "group": "owners", "parent": "collection", "access": "owner", "index": false, "phase": "mvp", "schema": [], "share": "record", "components": ["RegistrySeal", "CatalogueCard", "CareKit", "FilmFrame", "MakerNote", "ShareCard", "ShareBar"], "data": ["piece", "maker", "ownership", "careKit", "documents", "notes(this piece)"] },
+    { "id": "transfer", "path": "/account/collection/[registryId]/transfer", "name": "Pass it on", "group": "owners", "parent": "ownedPiece", "access": "owner", "index": false, "phase": "phase-2", "schema": [], "share": "none", "components": ["RegistrySeal", "Button"], "data": ["ownership"], "primaryAction": "Record to the new owner" },
+    { "id": "orders", "path": "/account/orders", "name": "Orders", "group": "owners", "parent": "account", "access": "signed-in", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["PieceCard"], "data": ["orders"] },
+    { "id": "order", "path": "/account/orders/[orderId]", "name": "Order", "group": "owners", "parent": "orders", "access": "order-owner", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["ObjectLabel", "CareKit", "Button"], "data": ["order", "fulfilmentEvents"] },
+    { "id": "notes", "path": "/account/notes", "name": "Your notes to makers", "group": "owners", "parent": "account", "access": "signed-in", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["MakerNote"], "data": ["notes(sent)", "replies"] },
+    { "id": "settings", "path": "/account/settings", "name": "Settings", "group": "owners", "parent": "account", "access": "signed-in", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["Button"], "data": ["owner", "privacy", "currency", "language", "careReminders"] },
+
+    { "id": "studio", "path": "/studio", "name": "Studio", "group": "studio", "parent": "home", "access": "staff", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": [], "data": ["tasks"] },
+    { "id": "studioPieces", "path": "/studio/pieces", "name": "Pieces", "group": "studio", "parent": "studio", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["PieceCard"], "data": ["pieces(all states)"] },
+    { "id": "studioPieceNew", "path": "/studio/pieces/new", "name": "New piece", "group": "studio", "parent": "studioPieces", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["RegistrySeal"], "data": ["registry(next serial)"], "primaryAction": "Issue registry number" },
+    { "id": "studioPiece", "path": "/studio/pieces/[registryId]", "name": "Edit piece", "group": "studio", "parent": "studioPieces", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["ObjectLabel", "PlacementCompass", "CareKit", "MakingTimeline", "Hotspot", "MakersShare"], "data": ["piece", "media", "careKit", "makingStages", "shareSplit"], "primaryAction": "Publish" },
+    { "id": "studioMakers", "path": "/studio/makers", "name": "Makers", "group": "studio", "parent": "studio", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["ArtisanByline"], "data": ["makers"] },
+    { "id": "studioMaker", "path": "/studio/makers/[makerSlug]", "name": "Edit maker", "group": "studio", "parent": "studioMakers", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["ArtisanByline"], "data": ["maker", "consents", "payouts"] },
+    { "id": "studioRooms", "path": "/studio/rooms", "name": "Rooms", "group": "studio", "parent": "studio", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["CollectionRoom"], "data": ["rooms"] },
+    { "id": "studioMedia", "path": "/studio/media", "name": "Media", "group": "studio", "parent": "studio", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["FilmFrame", "Hotspot"], "data": ["plates", "films", "models3d"] },
+    { "id": "studioNotes", "path": "/studio/notes", "name": "Notes", "group": "studio", "parent": "studio", "access": "staff:field", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["MakerNote"], "data": ["notes(queue)"], "steps": ["moderate", "translate", "deliver", "record reply"] },
+    { "id": "studioOrders", "path": "/studio/orders", "name": "Orders", "group": "studio", "parent": "studio", "access": "staff:fulfilment", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": [], "data": ["orders"] },
+    { "id": "studioOrder", "path": "/studio/orders/[orderId]", "name": "Fulfil order", "group": "studio", "parent": "studioOrders", "access": "staff:fulfilment", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["CatalogueCard", "CareKit"], "data": ["order", "exportClearance", "fulfilmentEvents"], "steps": ["export clearance", "print card", "pack piece, card and care kit", "ship", "delivered"] },
+    { "id": "studioPrint", "path": "/studio/print/[registryId]", "name": "Print cards", "group": "studio", "parent": "studio", "access": "staff", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": ["CatalogueCard", "CareKit"], "data": ["piece", "careKit"] },
+    { "id": "studioContent", "path": "/studio/content", "name": "Content", "group": "studio", "parent": "studio", "access": "staff:curator", "index": false, "phase": "mvp", "schema": [], "share": "none", "components": [], "data": ["crafts", "topics", "places", "careGuides", "journalPosts", "faqs"] }
+  ],
+  "redirects": [
+    { "from": "/p/[registryId]", "to": "/pieces/[pieceKey]", "status": 301, "use": "share links and printed material" },
+    { "from": "/r/[registryId]", "to": "/record/[registryId]", "status": 301, "use": "QR code on the catalogue card" },
+    { "from": "/pieces/[registryId]", "to": "/pieces/[pieceKey]", "status": 301, "use": "registry id without slug" },
+    { "from": "/pieces/[registryId]-[oldSlug]", "to": "/pieces/[pieceKey]", "status": 301, "use": "renamed piece" },
+    { "from": "uppercase registry ids", "to": "lowercase", "status": 301, "use": "typed or pasted ids" }
+  ],
+  "system": [
+    { "path": "/sitemap.xml", "what": "sitemap index with hreflang", "children": ["/sitemaps/pages.xml", "/sitemaps/pieces.xml", "/sitemaps/makers.xml", "/sitemaps/topics.xml", "/sitemaps/journal.xml"] },
+    { "path": "/robots.txt", "what": "allows the gallery; disallows /account, /checkout, /cart, /studio, /search, /record and filter parameters; points to /sitemap.xml" },
+    { "path": "/llms.txt", "what": "plain-language guide for AI engines: what Sīpa is, the registry, how makers are paid, links to crafts, meaning, care and makers" },
+    { "path": "/og/[kind]/[id].png", "what": "generated 1200x630 ShareCard images", "kinds": ["piece", "maker", "room", "record"] },
+    { "path": "/feed.xml", "what": "journal RSS" },
+    { "path": "/404", "what": "designed not-found page on the iconometric grid" },
+    { "path": "/500", "what": "designed error page" }
+  ]
+}

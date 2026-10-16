@@ -1,0 +1,39 @@
+{
+  "name": "sipa",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sīpa: one-of-a-kind art made by hand in Nepal, told through its maker and recorded for life.",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test:e2e": "playwright test",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run build",
+    "check:content": "python3 scripts/check_content.py content docs/sitemap.routes.json",
+    "test:e2e:install": "playwright install --with-deps chromium"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "18.0.14",
+    "next": "16.3.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "^16.4.1",
+    "prettier": "3.9.9",
+    "typescript": "5.9.3"
+  }
+}

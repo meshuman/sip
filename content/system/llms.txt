@@ -1,0 +1,38 @@
+# Sīpa
+
+> Sīpa (सीप, "skill") sells one-of-a-kind statues, thangkas, Mithila paintings, and wood, stone and metal work made by named makers across Nepal. Every piece has a registry number for life (for example PTN-MT-26-0142). Every piece page states, in Nepali rupees, how much of the price goes to the maker's workshop. Every piece ships cleared for export, with a printed catalogue card and a care kit for its material.
+
+Key facts:
+- A registry number has four parts: place made (PTN Patan, BKT Bhaktapur, KTM Kathmandu, JNK Janakpur, LMB Lumbini, PKR Pokhara), craft (MT metal, ST stone, WD wood, TK thangka, MH Mithila, PP paper and other), two-digit year finished, and a serial that is never reused.
+- Anyone can check a number at https://sipa.example/registry. A record shows the piece, its maker, its registration date and its owners, named only with their consent.
+- Placement guidance on Sīpa pages describes custom, not promises of luck or health.
+- "Made in Lumbini" is used only for pieces made in Lumbini. Buddha figures made elsewhere in Nepal are described as "From the land of the Buddha's birth".
+
+## Crafts
+- [Lost-wax casting](https://sipa.example/crafts/lost-wax-casting): how Newar metalworkers in Patan cast and gild statues
+- [Thangka painting](https://sipa.example/crafts/thangka-painting): mineral pigment and gold on cotton, drawn on a proportion grid
+- [Mithila painting](https://sipa.example/crafts/mithila-painting): painting by women in and around Janakpur
+- [Newar woodcarving](https://sipa.example/crafts/newar-woodcarving): carved windows, struts and figures from the Kathmandu Valley
+- [Stone carving](https://sipa.example/crafts/stone-carving): figures cut by hammer and chisel
+
+## Meaning
+- [The mudras](https://sipa.example/meaning/mudras): the Buddha's hand gestures and what they mean
+- [The earth-touching gesture](https://sipa.example/meaning/earth-touching-mudra)
+- [Shakyamuni Buddha](https://sipa.example/meaning/shakyamuni-buddha), born in Lumbini, Nepal
+- [The five Buddha families](https://sipa.example/meaning/five-buddha-families)
+- [Green Tara](https://sipa.example/meaning/green-tara)
+- [Ganesh](https://sipa.example/meaning/ganesh)
+- [Mithila motifs](https://sipa.example/meaning/mithila-motifs): fish, peacock, bamboo, lotus, sun and moon
+
+## Care
+- [Care guides by material](https://sipa.example/care): wood, metal, stone, painted cloth, paper
+
+## Places and makers
+- [Places](https://sipa.example/places): Patan, Bhaktapur, Kathmandu, Janakpur, Lumbini
+- [Makers](https://sipa.example/makers)
+
+## How Sīpa works
+- [Our promise](https://sipa.example/about)
+- [How we work](https://sipa.example/about/how-we-work)
+- [Export and customs](https://sipa.example/help/export-and-customs)
+- [Questions](https://sipa.example/help/faq)

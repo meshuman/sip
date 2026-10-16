@@ -1,0 +1,50 @@
+<!-- Sīpa design system · MakerNote preview. Open in a browser. -->
+<!doctype html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1"><script>(function(){var m=location.search.match(/theme=(light|dark)/);if(m)document.documentElement.setAttribute("data-theme",m[1]);})();</script><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><meta charset="utf-8"><title>Note to the maker</title></head>
+<body class="sp" style="margin:0;padding:24px;display:grid;gap:40px">
+<form class="sp-note" id="note-form" aria-label="Write to Raju Shakya">
+  <div class="sp-note__to">
+    <div class="sp-byline__halo sp-note__halo"><div class="sp-byline__face" aria-hidden="true">रा</div></div>
+    <div>
+      <p class="sp-label" style="margin:0">Write to the maker</p>
+      <h3>Raju Shakya, Nagbahal</h3>
+      <p class="sp-note__hint">Your note is read to Raju in Nepali at the workshop. Say what the piece means to you, or where it now lives.</p>
+    </div>
+  </div>
+  <label class="sp-label" for="note-text">Your note</label>
+  <textarea id="note-text" rows="4" maxlength="600">Raju ji, the Buddha arrived safely in Zürich and now faces the morning light in our living room. My daughter asked who made it, and we watched your film together. Thank you for the eleven days on the face.</textarea>
+  <div class="sp-note__row">
+    <label class="sp-note__check"><input type="checkbox" id="note-public" checked> Show my first name and city on Raju's page</label>
+    <span class="sp-reg-s sp-note__count" id="note-count">0 / 600</span>
+  </div>
+  <div class="sp-row">
+    <button class="sp-btn" type="submit">Send to Raju</button>
+    <span class="sp-note__sent" id="note-sent" hidden>Sent. Raju will hear it at the workshop this week.</span>
+  </div>
+</form>
+
+<section class="sp-thread" aria-label="Notes on Raju Shakya's page">
+  <p class="sp-label">Notes from owners · 3</p>
+  <article class="sp-thread__note">
+    <p>"The Buddha arrived safely in Zürich and now faces the morning light in our living room. Thank you for the eleven days on the face."</p>
+    <footer><b>Anna, Zürich</b> · owner of <span class="sp-reg-s">PTN-MT-26-0142</span></footer>
+    <div class="sp-thread__reply">
+      <span class="sp-label">Raju replied</span>
+      <p lang="ne">तपाईंको घरमा पुगेकोमा खुसी लाग्यो। छोरीलाई मेरो नमस्कार।</p>
+      <p>"I am happy it reached your home. My namaste to your daughter."</p>
+    </div>
+  </article>
+</section>
+<script>
+  (function () {
+    var t = document.getElementById('note-text'), c = document.getElementById('note-count');
+    function count() { c.textContent = t.value.length + ' / 600'; }
+    t.addEventListener('input', count); count();
+    document.getElementById('note-form').addEventListener('submit', function (e) {
+      e.preventDefault(); document.getElementById('note-sent').hidden = false;
+    });
+  })();
+</script>
+</body>
+</html>

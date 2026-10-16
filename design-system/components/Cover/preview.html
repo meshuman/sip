@@ -1,0 +1,46 @@
+<!-- Sīpa design system · Cover preview. Open in a browser. -->
+<!doctype html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1"><script>(function(){var m=location.search.match(/theme=(light|dark)/);if(m)document.documentElement.setAttribute("data-theme",m[1]);})();</script><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><meta charset="utf-8"><title>Sīpa cover</title>
+<style>
+  html, body { margin: 0; background: var(--lokta); }
+  .cv { position: relative; width: 960px; height: 288px; overflow: hidden; background: var(--lokta); }
+  .cv svg { position: absolute; inset: 0; }
+  .mal { fill: var(--malachite); }
+  .lap { fill: var(--lapis); }
+  .tint { fill: var(--lokta-deep); }
+  .gilt { fill: var(--gilt); }
+  .halo { fill: none; stroke: var(--lokta); stroke-width: 1.5; }
+  .axis { stroke: var(--gilt); stroke-width: 1; }
+  .grid { stroke: var(--line); stroke-width: 1; }
+  .txt { position: absolute; left: 40px; bottom: 40px; max-width: 440px; }
+  .name { font-family: var(--font-display); font-size: 120px; line-height: .92; color: var(--ink); margin: 0; }
+  .tag { font-family: var(--font-text); font-size: 14px; line-height: 20px; color: var(--stone); margin: 16px 0 0; }
+</style>
+</head>
+<body>
+<div class="cv">
+  <svg viewBox="0 0 960 288" width="960" height="288" aria-hidden="true">
+    <!--
+      blocks: malachite slab 240x288 (2 x space-7, full height); lapis 120x120 (space-7) bleeding right; lokta-deep tint 96x120; gilt disc r40 (space-5) — radius-0 corners throughout.
+      arrangement: one tall slab with satellites, bleeding off top, bottom and right; all right of x=480.
+      pattern: editorial / iconometric row — a thangka painter's proportion lines: one gilt axis through the slab plus three hairlines in the line token; chosen because Sīpa's README says "hairlines, not shadows" and the cover grid comes from thangka iconometry.
+      scales: pitch space-6 (72) between horizontals, space-7 (120) block side; halo ring = radius-halo, the brand's only circle.
+    -->
+    <rect class="tint" x="504" y="168" width="96" height="120"></rect>
+    <rect class="mal" x="600" y="0" width="240" height="288"></rect>
+    <rect class="lap" x="840" y="168" width="120" height="120"></rect>
+    <line class="grid" x1="480" y1="48" x2="960" y2="48"></line>
+    <line class="grid" x1="480" y1="120" x2="600" y2="120"></line>
+    <line class="grid" x1="840" y1="120" x2="960" y2="120"></line>
+    <line class="axis" x1="720" y1="0" x2="720" y2="288"></line>
+    <circle class="halo" cx="720" cy="120" r="72"></circle>
+    <circle class="gilt" cx="840" cy="168" r="40"></circle>
+  </svg>
+  <div class="txt">
+    <p class="name">Sīpa</p>
+    <p class="tag">Made by hand in Nepal. Recorded for life.</p>
+  </div>
+</div>
+</body>
+</html>

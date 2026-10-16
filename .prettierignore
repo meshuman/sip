@@ -1,0 +1,11 @@
+.next
+node_modules
+content
+design-system
+docs
+public
+package-lock.json
+src/lib/art/illustrations.js
+src/data/catalog.ts
+src/styles/components.css
+src/styles/tokens.css

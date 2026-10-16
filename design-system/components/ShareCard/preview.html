@@ -1,0 +1,37 @@
+<!-- Sīpa design system · ShareCard preview. Open in a browser. -->
+<!doctype html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1"><script>(function(){var m=location.search.match(/theme=(light|dark)/);if(m)document.documentElement.setAttribute("data-theme",m[1]);})();</script><link rel="stylesheet" href="../../tokens.css"><link rel="stylesheet" href="../bundle.css"><meta charset="utf-8"><title>Share card</title></head>
+<body class="sp" style="margin:0;padding:24px">
+<div id="fit" style="width:100%;overflow:hidden">
+  <article class="sp-sharecard" id="card" aria-label="Link preview for Shakyamuni, earth-touching">
+    <div class="sp-sharecard__plate">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <circle cx="200" cy="170" r="92" style="fill:none;stroke:var(--gilt)" stroke-width="1.5"></circle>
+        <circle cx="200" cy="120" r="11" style="fill:var(--line)"></circle>
+        <ellipse cx="200" cy="160" rx="29" ry="35" style="fill:var(--line)"></ellipse>
+        <path d="M200 196c-38 2-58 20-62 50l-10 92h144l-10-92c-4-30-24-48-62-50Z" style="fill:var(--line)"></path>
+        <path d="M110 392c4-40 46-56 90-56s86 16 90 56Z" style="fill:var(--line)"></path>
+        <path d="M96 392h208v26H96Z" style="fill:var(--stone)" opacity=".45"></path>
+      </svg>
+    </div>
+    <div class="sp-sharecard__text">
+      <div class="sp-sharecard__brand"><b>Sīpa</b><span class="sp-label">Made by hand in Nepal</span></div>
+      <h2>Shakyamuni, <span class="sp-nb">earth-touching</span></h2>
+      <p>Made by Raju Shakya in Patan over 38 days.</p>
+      <div class="sp-sharecard__foot">
+        <div class="sp-seal__ring" aria-hidden="true"><span>स</span></div>
+        <span class="sp-reg">SĪPA · PTN-MT-26-0142</span>
+      </div>
+    </div>
+  </article>
+</div>
+<script>
+  (function () {
+    var fit = document.getElementById('fit'), card = document.getElementById('card');
+    function size() { var s = Math.min(1, fit.clientWidth / 1200); card.style.transform = 'scale(' + s + ')'; fit.style.height = (630 * s) + 'px'; }
+    size(); window.addEventListener('resize', size);
+  })();
+</script>
+</body>
+</html>

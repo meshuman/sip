@@ -1,0 +1,60 @@
+/* Sīpa tokens. Generated from tokens.json; edit tokens.json, not this file. */
+
+@font-face { font-family: 'Hanken Grotesk'; src: url('fonts/HankenGrotesk-var.woff2') format('woff2'); font-weight: 300 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Mukta'; src: url('fonts/Mukta-Light.woff2') format('woff2'); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Mukta'; src: url('fonts/Mukta-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Mukta'; src: url('fonts/Mukta-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+
+:root {
+  /* colour: one light theme, no dark mode */
+  --lokta: #fbfbf9;
+  --lokta-deep: #f4f2ec;
+  --paper: #ffffff;
+  --sand: #e5e1dc;
+  --line: #d1d1d1;
+  --ink: #333333;
+  --stone: #666666;
+  --malachite: #da6d42;
+  --malachite-ink: #b4502b;
+  --malachite-wash: #fbe9e1;
+  --on-malachite: #ffffff;
+  --gilt: #999999;
+  --gilt-ink: #5c5c5c;
+  --lapis: #3d4a58;
+  --sindur: #8a3b2e;
+  --shadow-none: none;
+  --shadow-lift: 0 1px 0 #ebebeb, 0 18px 40px -24px rgba(38,37,37,0.25);
+  /* spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+  --space-6: 72px;
+  --space-7: 120px;
+  /* radius */
+  --radius-0: 0px;
+  --radius-1: 5px;
+  --radius-halo: 999px;
+  /* type families */
+  --font-display: "Hanken Grotesk", "Mukta", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
+  --font-text: "Hanken Grotesk", "Mukta", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
+  --font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-registry: "Hanken Grotesk", "Mukta", "Noto Sans Devanagari", "Segoe UI", system-ui, sans-serif;
+  /* motion: quiet, as on Woodwrights: 0.3s hovers, 0.5s fades */
+  --ease: ease;
+  --dur-1: 0.3s;
+  --dur-2: 0.5s;
+  color-scheme: light;
+}
+
+/* Type styles: .t-<style> */
+.t-display-xl { font-family: var(--font-display); letter-spacing: -0.02em; font-size: 56px; line-height: 64px; font-weight: 500; letter-spacing: -0.01em; }
+.t-display-l { font-family: var(--font-display); font-size: 40px; line-height: 48px; font-weight: 500; }
+.t-display-m { font-family: var(--font-display); font-size: 26px; line-height: 32px; font-weight: 500; }
+.t-lead { font-family: var(--font-text); font-size: 19px; line-height: 30px; font-weight: 400; }
+.t-body { font-family: var(--font-text); font-size: 16px; line-height: 26px; font-weight: 400; }
+.t-body-s { font-family: var(--font-text); font-size: 15px; line-height: 24px; font-weight: 400; }
+.t-label { font-family: var(--font-text); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.t-registry { font-family: var(--font-registry); font-size: 14px; line-height: 20px; font-weight: 500; letter-spacing: 0.04em; }
+.t-registry-s { font-family: var(--font-registry); font-size: 11px; line-height: 16px; font-weight: 400; letter-spacing: 0.06em; }

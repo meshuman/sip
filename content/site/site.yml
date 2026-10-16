@@ -1,0 +1,236 @@
+# Sīpa: site-wide copy. Every reusable string lives here.
+# {curly} = filled from data. {{TODO: …}} = Sīpa must supply.
+
+brand:
+  name: Sīpa
+  nameNe: सीप
+  meaning: Skill, the kind that lives in the hands.
+  tagline: Made by hand in Nepal. Recorded for life.
+  originLine: From the land of the Buddha's birth.
+  baseUrl: "https://sipa.example   # {{TODO: final domain}}"
+
+seo:
+  titleTemplate: "{page} · Sīpa"
+  defaultDescription: Statues, thangkas and Mithila paintings from named makers across Nepal, each with its maker's story, a care kit and a registry number.
+  defaultShareImage: /design-system/assets/Share/og-default.png
+
+header:
+  logoAlt: Sīpa, सीप, home
+  primary:
+    - { label: Rooms, href: /rooms }
+    - { label: Makers, href: /makers }
+    - { label: Places, href: /places }
+    - label: Learn
+      panel:
+        - heading: Crafts
+          href: /crafts
+          line: How each piece is made, and how to recognise good work.
+        - heading: Meaning
+          href: /meaning
+          line: What the figures, gestures and motifs signify.
+        - heading: Care
+          href: /care
+          line: How to look after wood, metal, stone, cloth and paper.
+    - { label: Journal, href: /journal }
+  utility:
+    search: Search
+    registry: Registry
+    registryTitle: Check a registry number
+    account: Account
+    signIn: Sign in
+    bag: Bag
+    bagCount: "Bag, {count} pieces"
+    bagCountOne: Bag, 1 piece
+    language: English
+    languageNe: नेपाली
+  menuOpen: Menu
+  menuClose: Close
+  skipLink: Skip to content
+
+footer:
+  tagline: Made by hand in Nepal. Recorded for life.
+  columns:
+    - heading: Sīpa
+      links:
+        - { label: Our promise, href: /about }
+        - { label: How we work, href: /about/how-we-work }
+        - { label: Visit a workshop, href: /visit, phase: phase-2 }
+        - { label: For designers and hotels, href: /trade, phase: phase-3 }
+    - heading: Help
+      links:
+        - { label: Shipping, href: /help/shipping }
+        - { label: Returns, href: /help/returns }
+        - { label: Export and customs, href: /help/export-and-customs }
+        - { label: Payments, href: /help/payments }
+        - { label: Questions, href: /help/faq }
+        - { label: Contact, href: /contact }
+    - heading: Owners
+      links:
+        - { label: Care guides, href: /care }
+        - { label: Check a registry number, href: /registry }
+        - { label: Your collection, href: /account/collection }
+  legal:
+    - { label: Terms, href: /legal/terms }
+    - { label: Privacy, href: /legal/privacy }
+    - { label: Cookies, href: /legal/cookies }
+  company: "{{TODO: registered company name}}, Lalitpur, Nepal"
+  copyright: "© {year} {{TODO: registered company name}}"
+  currencyLabel: Prices in
+  languageLabel: Language
+
+breadcrumbs:
+  home: Home
+  label: Breadcrumb
+
+currency:
+  options:
+    - { code: NPR, label: Nepali rupee, symbol: "₹" }
+    - { code: USD, label: US dollar, symbol: "$" }
+    - { code: EUR, label: Euro, symbol: "€" }
+  note: Prices are set in Nepali rupees. Other currencies are shown at today's rate and charged in the currency you see at checkout.
+
+# ---------- Reusable strings ----------
+ui:
+  actions:
+    makeItYours: Make it yours
+    watchTheMaking: Watch the making
+    viewIn3d: Turn it in 3D
+    meetMaker: "Meet {maker.firstName}"
+    enterRoom: Enter the room
+    enterRooms: Enter the rooms
+    seeAllPieces: See all pieces
+    addToBag: Make it yours
+    removeFromBag: Remove
+    continueToDetails: Continue to details
+    continue: Continue
+    back: Back
+    payAndRecord: Pay and record it to me
+    writeToMaker: "Write to {maker.firstName}"
+    sendNote: "Send to {maker.firstName}"
+    copyLink: Copy link
+    linkCopied: Link copied
+    share: Share
+    checkNumber: Check a number
+    openRecord: Open the record
+    reorderRefill: Reorder for this piece
+    passItOn: Pass it on
+    signOut: Sign out
+    save: Save
+    saved: Saved
+    askToVisit: Ask to visit
+    sendEnquiry: Send enquiry
+    loadMore: Show more
+    clearFilters: Clear filters
+
+  pieceStates:
+    available: Available
+    reserved: Being collected
+    reservedLine: Someone is checking out with this piece. It will return here if they don't complete within 15 minutes.
+    recorded: Recorded to its owner
+    recordedLine: "Recorded to its owner on {provenance.recordedDate}."
+    withdrawn: Withdrawn by the maker
+    withdrawnLine: "{maker.firstName} has kept this piece. Its record stays here."
+    oneOfOne: One of one
+    lastPiece: Last piece
+
+  labels:
+    material: Material
+    size: Size
+    inTheHand: In the hand
+    edition: Edition
+    madeBy: Made by
+    madeIn: Made in
+    registry: Registry
+    price: Price
+    days: "{n} days"
+    daysRange: "Days {from}–{to}"
+    day: "Day {n}"
+    sizeLine: "H {h} · W {w} · D {d} cm · {kg} kg"
+    sizeLineFlat: "H {h} · W {w} cm"
+
+  registry:
+    display: "SĪPA · {registryId}"
+    awaiting: "Registered {registeredDate} · awaiting its first owner"
+    recordedTo: "Recorded to {owner.publicName}, {owner.city} · {recordedDate}"
+    recordedPrivate: "Recorded to a private owner · {recordedDate}"
+    recordedToYou: Recorded to you
+    sealAlt: Sīpa registry seal
+
+  share:
+    heading: Share this piece
+    headingMaker: Share this maker
+    headingRecord: Share your piece
+    channels: [WhatsApp, Viber, Email]
+    pieceText: "{piece.title}, made by {maker.name} in {place.name} over {piece.daysInHand} days. {shortUrl}"
+    makerText: "{maker.name}, {maker.craft} in {place.name}. {shortUrl}"
+    recordText: "{piece.title} by {maker.name} now lives in {owner.city}. {shortUrl}"
+
+  filters:
+    heading: Filter
+    craft: Craft
+    place: Place
+    maker: Maker
+    material: Material
+    price: Price
+    availability: Show
+    availableOnly: Available only
+    includeRecorded: Include recorded pieces
+    sort: Sort
+    sortNewest: Newest first
+    sortPriceLow: Price, low to high
+    sortPriceHigh: Price, high to low
+    results: "{count} pieces"
+    resultsOne: 1 piece
+    none: No pieces match these filters.
+
+  empty:
+    room: This room is being hung. Its first pieces arrive soon.
+    makerPieces: "{maker.firstName} has no pieces available right now. Recorded pieces are below."
+    notes: No notes yet. Owners can write to the maker after their piece arrives.
+    collection: You don't own a recorded piece yet. When you buy one, it is recorded to you here.
+    orders: No orders yet.
+    sentNotes: You haven't written to a maker yet. You can write from any piece in your collection.
+    search: Nothing matches. Try a maker's name, a place, or a word like Buddha, thangka or fish.
+
+  errors:
+    generic: Something went wrong on our side. Try again in a minute.
+    network: You seem to be offline. Check your connection and try again.
+    registryInvalid: That isn't a registry number. They look like PTN-MT-26-0142, five parts separated by dashes.
+    registryUnknown: We can't find that number in the registry. Check it against the card, or write to us and we'll look it up.
+    pieceUnavailable: This piece has just been recorded to someone else. It has been removed from your bag.
+    reservedElsewhere: Someone else is checking out with this piece. Try again in 15 minutes.
+    codeWrong: That code isn't right. Check the latest message we sent, or ask for a new code.
+    codeExpired: That code has expired. Ask for a new one.
+    noteTooLong: Notes can be up to 600 characters.
+    required: "Enter your {field}."
+    email: Enter an email address like name@example.com.
+    phone: Enter a phone number with its country code, like +977 98…
+
+  forms:
+    name: Name
+    email: Email
+    phone: Phone
+    phoneHint: Include your country code. We can send updates on WhatsApp if you prefer.
+    whatsapp: Send updates on WhatsApp
+    country: Country
+    address1: Address
+    address2: Apartment, floor (optional)
+    city: City
+    region: State or province
+    postcode: Postcode
+    message: Message
+    optional: optional
+
+  notFound:
+    title: This room is empty
+    body: The page you're looking for isn't here. It may have moved, or the link may be mistyped.
+    links: [{ label: Enter the rooms, href: /rooms }, { label: Check a registry number, href: /registry }]
+  serverError:
+    title: Something went wrong
+    body: "It's on our side, not yours. Try again in a minute. If it keeps happening, write to {{TODO: support email}}."
+
+  cookieBanner:
+    text: We use cookies to keep your bag, remember your currency, and understand which pages help people. No advertising cookies.
+    accept: Accept
+    decline: Only essential
+    more: Cookie policy
