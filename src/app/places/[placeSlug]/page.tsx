@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { ArtisanByline } from '@/components/maker/ArtisanByline';
 import { PieceGrid } from '@/components/piece/PieceCard';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { placeLd, trimDesc } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { MAKERS, paths, PIECES } from '@/lib/catalog';
 import { getPlaces } from '@/lib/content';
@@ -14,7 +16,7 @@ export const generateStaticParams = () => Object.keys(getPlaces()).map((placeSlu
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const pl = getPlaces()[(await params).placeSlug];
-  return pl ? { title: `${pl.name}, ${pl.epithet}`, description: pl.description ?? pl.summary } : {};
+  return pl ? { title: `${pl.name}, ${pl.epithet}`, description: trimDesc(pl.description ?? pl.summary), alternates: { canonical: `/places/${pl.slug}` } } : {};
 }
 
 export default async function PlacePage({ params }: Params) {
@@ -25,6 +27,7 @@ export default async function PlacePage({ params }: Params) {
   const here = PIECES.filter((p) => p.place === placeSlug);
   return (
     <>
+      <JsonLd data={placeLd({ name: pl.name, path: `/places/${pl.slug}`, description: pl.summary })} />
       <Crumbs items={[['Home', '/'], ['Places', '/places'], [pl.name]]} />
       <section className="sec-top wrap">
         <ChapterHeader as="h1" label={`Places · ${pl.region}`} place heading={pl.name} lead={pl.summary} />

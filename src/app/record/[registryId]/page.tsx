@@ -5,6 +5,7 @@ import { RecordHistory, RecordOwnerBanner } from '@/components/views/RecordView'
 import { MakerNotes } from '@/components/maker/MakerNotes';
 import { ObjectLabel } from '@/components/piece/ObjectLabel';
 import { RegistrySeal } from '@/components/piece/RegistrySeal';
+import { trimDesc } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { Title } from '@/components/ui/Title';
 import { MAKERS, paths, pieceFromRegistryId, PIECES, regKey } from '@/lib/catalog';
@@ -16,7 +17,13 @@ export const generateStaticParams = () => PIECES.map((p) => ({ registryId: regKe
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const p = pieceFromRegistryId((await params).registryId);
-  return p ? { title: `Record · SĪPA ${p.id}`, description: `The registry record of ${p.title}, made by ${MAKERS[p.maker].name}.` } : {};
+  return p
+    ? {
+        title: `Record of ${p.title}, ${p.id}`,
+        description: trimDesc(`The public registry record of ${p.title}, made by ${MAKERS[p.maker].name} in ${placeName(p.place)}. Registry number ${p.id}.`),
+        alternates: { canonical: paths.record(p) },
+      }
+    : {};
 }
 
 export default async function RecordPage({ params }: Params) {

@@ -5,7 +5,11 @@ import { Crumbs } from '@/components/ui/Crumbs';
 import { MAKERS, paths } from '@/lib/catalog';
 import { getPlaces } from '@/lib/content';
 
-export const metadata: Metadata = { title: 'Places', description: 'Where each Sīpa piece is made: the towns and neighbourhoods of Nepal’s crafts.' };
+export const metadata: Metadata = {
+  title: 'Places: where the art is made in Nepal',
+  description: 'Patan, Bhaktapur, Kathmandu, Janakpur and Lumbini: the towns where Sīpa’s makers work, and the crafts each place is known for.',
+  alternates: { canonical: '/places' },
+};
 
 export default function PlacesPage() {
   const places = getPlaces();

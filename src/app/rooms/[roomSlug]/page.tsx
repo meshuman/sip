@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { RoomCard } from '@/components/home/RoomCard';
 import { PieceCard } from '@/components/piece/PieceCard';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { itemListLd, trimDesc } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
-import { BY_ID, piecesIn, ROOM_LEAD, ROOM_ORDER } from '@/lib/catalog';
+import { BY_ID, piecesIn, ROOM_LEAD, ROOM_ORDER, paths } from '@/lib/catalog';
 import { plural } from '@/lib/format';
 import { getRooms } from '@/lib/content';
 
@@ -13,7 +15,7 @@ export const generateStaticParams = () => ROOM_ORDER.map((roomSlug) => ({ roomSl
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const r = getRooms()[(await params).roomSlug];
-  return r ? { title: r.name, description: r.description ?? r.wallText } : {};
+  return r ? { title: r.name, description: trimDesc(r.description ?? r.wallText), alternates: { canonical: `/rooms/${r.slug}` } } : {};
 }
 
 export default async function RoomPage({ params }: Params) {
@@ -26,6 +28,13 @@ export default async function RoomPage({ params }: Params) {
   const ordered = [lead, ...list.filter((p) => p !== lead)];
   return (
     <>
+      <JsonLd
+        data={itemListLd(
+          r.name,
+          `/rooms/${r.slug}`,
+          ordered.map((x) => ({ name: x.title, path: paths.piece(x) })),
+        )}
+      />
       <Crumbs items={[['Home', '/'], ['Rooms', '/rooms'], [r.name]]} />
       <section className="sec-top wrap">
         <section className="sp-room">

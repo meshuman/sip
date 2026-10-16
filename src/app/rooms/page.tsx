@@ -7,7 +7,11 @@ import { BY_ID, paths, piecesIn, ROOM_LEAD, ROOM_ORDER } from '@/lib/catalog';
 import { plural } from '@/lib/format';
 import { getRooms } from '@/lib/content';
 
-export const metadata: Metadata = { title: 'The rooms', description: 'The Sīpa collection, hung room by room: by craft, by place and by story.' };
+export const metadata: Metadata = {
+  title: 'Rooms: art from Nepal by craft and place',
+  description: 'Walk through the Sīpa collection room by room: Buddha figures, metalwork, Mithila paintings, thangkas, woodcarving and stone, each by a named maker.',
+  alternates: { canonical: '/rooms' },
+};
 
 export default function RoomsPage() {
   const rooms = getRooms();

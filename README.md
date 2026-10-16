@@ -142,3 +142,12 @@ git commit -m "Sīpa web app"
 git remote add origin https://github.com/<owner>/<repo>.git
 git push -u origin main
 ```
+
+## Search, answer and AI engines
+
+- **Set `NEXT_PUBLIC_SITE_URL`** to the live address before deploying. Canonical links, the sitemap, `robots.txt`, `llms.txt`, social images and structured data all use it.
+- **Every page** has its own title, a description under 155 characters, a self-referencing canonical, and a social image. Piece pages use the piece's photograph.
+- **Structured data** (schema.org JSON-LD, helpers in `src/lib/seo.ts`): Organization and WebSite on every page; BreadcrumbList wherever a breadcrumb shows; Product and VisualArtwork on pieces; Article with a DefinedTerm on craft, meaning and care pages; FAQPage on `/help/faq`; CollectionPage lists on rooms, All pieces and Behind the scenes; ProfilePage on makers; Place on places.
+- **Filtered lists** (`/pieces?craft=…`) are `noindex` and point their canonical at `/pieces`.
+- **`/llms.txt`** is served from `content/system/llms.txt`, a plain-language guide for AI answer engines. Keep it in step with the site.
+- **Answer-first writing:** each page opens with a one-sentence answer, and craft pages list their sources.

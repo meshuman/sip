@@ -66,7 +66,9 @@ export function SiteHeader({ brand }: { brand: ReactNode }) {
               <span>Yours</span>
             </Link>
           )}
-          <Link href="/cart">Bag {bag.length > 0 && <span className="sp-reg-s">({bag.length})</span>}</Link>
+          <Link href="/cart" className="bag-link">
+            Bag {bag.length > 0 && <span className="sp-reg-s">({bag.length})</span>}
+          </Link>
           <button id="menu-btn" type="button" aria-expanded={menuOpen} aria-label="Menu" onClick={() => setMenuOpen((o) => !o)}>
             Menu
           </button>

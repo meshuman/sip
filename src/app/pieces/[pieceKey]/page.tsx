@@ -16,7 +16,9 @@ import { RegistrySeal } from '@/components/piece/RegistrySeal';
 import { ShareBar } from '@/components/piece/ShareBar';
 import { Stage } from '@/components/piece/Stage';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
+import { PIECE_PHOTOS } from '@/data/photos';
 import { STORIES } from '@/data/stories';
+import { abs, trimDesc } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { Icon } from '@/components/ui/Icon';
 import { Plate } from '@/components/ui/Plate';
@@ -34,10 +36,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const p = pieceFromKey((await params).pieceKey);
   if (!p) return {};
   const m = MAKERS[p.maker];
+  const img = PIECE_PHOTOS[p.id];
+  const description = trimDesc(`${p.lead} Registry number ${p.id}.`);
   return {
     title: `${p.title} by ${m.name}`,
-    description: `${p.lead} Registry number ${p.id}.`,
+    description,
     alternates: { canonical: paths.piece(p) },
+    openGraph: { type: 'website', title: `${p.title} by ${m.name}`, description, ...(img ? { images: [{ url: abs(img), alt: `${p.title}, ${p.material}` }] } : {}) },
+    twitter: { card: 'summary_large_image', ...(img ? { images: [abs(img)] } : {}) },
   };
 }
 
@@ -74,10 +80,26 @@ export default async function PiecePage({ params }: Params) {
     '@type': ['Product', 'VisualArtwork'],
     name: p.title,
     identifier: p.id,
+    sku: p.id,
+    url: abs(paths.piece(p)),
     description: p.lead,
     artMedium: p.material,
+    image: PIECE_PHOTOS[p.id] ? [abs(PIECE_PHOTOS[p.id])] : undefined,
+    brand: { '@type': 'Brand', name: 'Sīpa' },
+    countryOfOrigin: 'NP',
+    material: p.material,
     creator: { '@type': 'Person', name: m.name, address: { '@type': 'PostalAddress', addressLocality: pl.name, addressCountry: 'NP' } },
-    offers: p.recorded ? undefined : { '@type': 'Offer', price: p.price, priceCurrency: 'NPR', availability: 'https://schema.org/InStock' },
+    offers: p.recorded
+      ? undefined
+      : {
+          '@type': 'Offer',
+          url: abs(paths.piece(p)),
+          price: p.price,
+          priceCurrency: 'NPR',
+          availability: 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
+          seller: { '@type': 'Organization', name: 'Sīpa' },
+        },
   };
 
   return (
@@ -87,7 +109,7 @@ export default async function PiecePage({ params }: Params) {
       <section className="wrap sec-top">
         <section className="sp-hero">
           <figure className="sp-hero__plate" style={{ margin: 0 }}>
-            <Plate piece={p} />
+            <Plate piece={p} alt={`${p.title}, ${p.material}, made by ${m.name} in ${pl.name}`} />
             <figcaption className="sp-hero__caption">Day {p.days}, finished</figcaption>
           </figure>
           <div className="sp-hero__text">

@@ -7,7 +7,11 @@ import { paths, PIECES } from '@/lib/catalog';
 import { formatDate } from '@/lib/format';
 import { getPosts } from '@/lib/content';
 
-export const metadata: Metadata = { title: 'Journal', description: 'Stories from the workshops behind Sīpa’s pieces, and plain guides to how Sīpa works.' };
+export const metadata: Metadata = {
+  title: 'Journal: stories from the workshops',
+  description: 'Stories from the workshops behind Sīpa’s art, and plain guides to how pieces are made, shipped and looked after.',
+  alternates: { canonical: '/journal' },
+};
 
 // Placeholder images for posts until each has its own photograph.
 const COVERS: [number, number][] = [

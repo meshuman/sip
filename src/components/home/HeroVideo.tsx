@@ -4,22 +4,23 @@ import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { HeroVideo as HeroVideoData } from '@/data/hero-video';
 
 const REDUCED = '(prefers-reduced-motion: reduce)';
+const PHONE = '(max-width: 860px)';
 
 const subscribe = (onChange: () => void) => {
-  const mq = window.matchMedia(REDUCED);
-  mq.addEventListener('change', onChange);
-  return () => mq.removeEventListener('change', onChange);
+  const queries = [window.matchMedia(REDUCED), window.matchMedia(PHONE)];
+  queries.forEach((q) => q.addEventListener('change', onChange));
+  return () => queries.forEach((q) => q.removeEventListener('change', onChange));
 };
 
-/** True when the visitor has neither asked for reduced motion nor turned on data saver. */
+/** True when the visitor has not asked for reduced motion, has no data saver, and is not on a phone-sized screen. */
 const filmWelcome = () => {
   const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
-  return !window.matchMedia(REDUCED).matches && !saveData;
+  return !window.matchMedia(REDUCED).matches && !window.matchMedia(PHONE).matches && !saveData;
 };
 
 /**
  * Hero background film. The poster frame is always there, so nothing jumps. The film itself loads only when it is welcome:
- * not with reduced motion, not with data saver. It pauses when scrolled out of view, and can be paused by the visitor (WCAG 2.2.2).
+ * not with reduced motion, not with data saver, not on a phone. It pauses when scrolled out of view, and can be paused by the visitor (WCAG 2.2.2).
  */
 export function HeroVideo({ video }: { video: HeroVideoData }) {
   const box = useRef<HTMLDivElement>(null);

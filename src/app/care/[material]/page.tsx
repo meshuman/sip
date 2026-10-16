@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { articleLd, trimDesc } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { Icon } from '@/components/ui/Icon';
 import { getCareGuides } from '@/lib/content';
@@ -11,7 +13,7 @@ export const generateStaticParams = () => Object.keys(getCareGuides()).map((mate
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const c = getCareGuides()[(await params).material];
-  return c ? { title: `Caring for ${c.material}`, description: c.description ?? c.summary } : {};
+  return c ? { title: `How to care for ${c.material}`, description: trimDesc(c.description ?? c.summary), alternates: { canonical: `/care/${c.slug}` } } : {};
 }
 
 export default async function CareGuidePage({ params }: Params) {
@@ -20,6 +22,7 @@ export default async function CareGuidePage({ params }: Params) {
   if (!c) notFound();
   return (
     <>
+      <JsonLd data={articleLd({ headline: `How to care for ${c.material}`, description: c.summary, path: `/care/${c.slug}` })} />
       <Crumbs items={[['Home', '/'], ['Learn', '/crafts'], ['Care', '/care'], [`Caring for ${c.material}`]]} />
       <section className="sec-top wrap">
         <ChapterHeader as="h1" label="Care" heading={`Caring for ${c.material}`} lead={c.summary} />

@@ -6,7 +6,11 @@ import { Crumbs } from '@/components/ui/Crumbs';
 import { MAKERS, paths } from '@/lib/catalog';
 import { getPlaces } from '@/lib/content';
 
-export const metadata: Metadata = { title: 'The makers', description: 'The people who make Sīpa’s pieces, in their own workshops across Nepal.' };
+export const metadata: Metadata = {
+  title: 'Makers: the people behind the art',
+  description: 'Meet the makers behind Sīpa: metal casters, painters, woodcarvers and a stone carver, each working in their own workshop in Nepal.',
+  alternates: { canonical: '/makers' },
+};
 
 export default function MakersPage() {
   const places = getPlaces();

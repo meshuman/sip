@@ -14,6 +14,8 @@ interface Props {
   bare?: boolean;
   /** Display width hint for the photograph, as an HTML sizes value */
   sizes?: string;
+  /** Describes the photograph. Leave empty where the piece's name sits beside it. */
+  alt?: string;
 }
 
 /**
@@ -21,14 +23,14 @@ interface Props {
  * Pieces with a photograph in src/data/photos.ts show it. Making stages and the turning viewer
  * still use the drawn illustration (src/lib/art).
  */
-export function Plate({ piece, stage, bare, sizes = '(max-width: 600px) 80vw, (max-width: 1100px) 45vw, 480px' }: Props) {
+export function Plate({ piece, stage, bare, alt = '', sizes = '(max-width: 600px) 80vw, (max-width: 1100px) 45vw, 480px' }: Props) {
   const uid = useId();
   const photo = PIECE_PHOTOS[piece.id];
   // The finished piece is shown as a photograph. Making stages and the turning viewer stay drawn.
   if (photo && stage === undefined && !bare) {
     return (
       <div className="art">
-        <Image className="art__photo" src={photo} alt="" fill sizes={sizes} />
+        <Image className="art__photo" src={photo} alt={alt} fill sizes={sizes} />
       </div>
     );
   }

@@ -6,7 +6,7 @@ import { paths } from '@/lib/catalog';
 import { getCareGuides, getCrafts, getTopics } from '@/lib/content';
 
 export const metadata: Metadata = {
-  title: 'Learn about the art',
+  title: 'Learn: crafts, meaning and care of Nepali art',
   description: 'How each piece is made, what it signifies and how to look after it: lost-wax casting, Mithila painting, thangka, woodcarving and stone.',
 };
 

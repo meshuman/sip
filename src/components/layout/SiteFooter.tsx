@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Lockup } from '@/components/ui/Lockup';
 import { ResetDemoButton } from './ResetDemoButton';
+import { SocialIcons } from './SocialIcons';
+import { Subscribe } from './Subscribe';
 
 const COLS: [string, [string, string][]][] = [
   [
@@ -45,6 +47,14 @@ export function SiteFooter() {
   return (
     <footer className="site-foot">
       <div className="wrap">
+        <div className="foot-join">
+          <div>
+            <h3>Stories from Nepal, in your inbox</h3>
+            <p>New pieces, the makers behind them and how to look after what you own, once a month.</p>
+            <SocialIcons />
+          </div>
+          <Subscribe />
+        </div>
         <div className="foot-grid">
           <div>
             <Lockup />

@@ -2,16 +2,23 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PieceGrid } from '@/components/piece/PieceCard';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { itemListLd } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { paths, PIECES, ROOM_ORDER } from '@/lib/catalog';
 import { plural } from '@/lib/format';
 import { getCrafts, getRooms } from '@/lib/content';
 
-export const metadata: Metadata = {
-  title: 'All pieces',
-  description: 'Every piece in the Sīpa collection: single, made by a named maker in Nepal and recorded for life.',
-  alternates: { canonical: '/pieces' },
-};
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ craft?: string; room?: string }> }): Promise<Metadata> {
+  const { craft, room } = await searchParams;
+  return {
+    title: 'All pieces: one-of-a-kind art from Nepal',
+    description: 'Every piece in the Sīpa collection, each single and made by a named maker in Nepal. Filter by room and craft.',
+    // A filtered list is not a page of its own: it points back to the full list and stays out of the index.
+    alternates: { canonical: '/pieces' },
+    ...(craft || room ? { robots: { index: false, follow: true } } : {}),
+  };
+}
 
 // Filters live in the query string (/pieces?craft=thangka-painting) and are not indexed.
 export default async function PiecesPage({ searchParams }: { searchParams: Promise<{ craft?: string; room?: string }> }) {
@@ -21,6 +28,13 @@ export default async function PiecesPage({ searchParams }: { searchParams: Promi
   const list = PIECES.filter((p) => (!craft || p.craft === craft) && (!room || p.rooms.includes(room)));
   return (
     <>
+      <JsonLd
+        data={itemListLd(
+          'All pieces',
+          '/pieces',
+          PIECES.map((x) => ({ name: x.title, path: paths.piece(x) })),
+        )}
+      />
       <Crumbs items={[['Home', '/'], ['All pieces']]} />
       <section className="sec-top wrap">
         <ChapterHeader

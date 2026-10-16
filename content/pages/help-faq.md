@@ -2,7 +2,7 @@
 id: helpFaq
 route: /help/faq
 status: ready
-title: Questions
+title: "Questions about buying art from Nepal"
 seo:
   title: Questions about Sīpa pieces, the registry and makers · Sīpa
   description: Answers about Sīpa's registry numbers, how makers are paid, writing to a maker, care kits, gifts, 3D views and films of the making.

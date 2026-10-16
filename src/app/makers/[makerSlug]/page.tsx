@@ -6,6 +6,9 @@ import { MakerImpact, MakerPieces } from '@/components/views/MakerSections';
 import { MakerNotes, MakerNotesCount } from '@/components/maker/MakerNotes';
 import { Making } from '@/components/piece/Making';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
+import { placeName } from '@/data/places';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { personLd, trimDesc } from '@/lib/seo';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { MAKERS, makerPieces, paths } from '@/lib/catalog';
 import { getPlaces } from '@/lib/content';
@@ -16,7 +19,13 @@ export const generateStaticParams = () => Object.keys(MAKERS).map((makerSlug) =>
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const m = MAKERS[(await params).makerSlug];
-  return m ? { title: `${m.name}, ${m.craftLabel.toLowerCase()}`, description: m.bio[0] } : {};
+  return m
+    ? {
+        title: `${m.name}, ${m.craftLabel.toLowerCase()} in ${placeName(m.place)}`,
+        description: trimDesc(m.bio[0]),
+        alternates: { canonical: paths.maker((await params).makerSlug) },
+      }
+    : {};
 }
 
 export default async function MakerPage({ params }: Params) {
@@ -28,6 +37,7 @@ export default async function MakerPage({ params }: Params) {
   const filmPiece = mine.find((p) => p.film.shows === 'this') ?? mine[0];
   return (
     <>
+      <JsonLd data={personLd({ name: m.name, path: paths.maker(slug), description: m.bio[0], place: placeName(m.place), jobTitle: m.craftLabel })} />
       <Crumbs items={[['Home', '/'], ['Makers', '/makers'], [m.name]]} />
       <section className="wrap maker-hero">
         <div className="maker-hero__id">

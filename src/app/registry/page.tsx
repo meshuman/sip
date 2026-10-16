@@ -3,7 +3,11 @@ import { RegistryForm } from '@/components/forms/RegistryForm';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
 import { Crumbs } from '@/components/ui/Crumbs';
 
-export const metadata: Metadata = { title: 'The registry', description: 'Every Sīpa piece has a registry number for life. Check a number and open its record.' };
+export const metadata: Metadata = {
+  title: 'Registry: check a registry number',
+  description: 'Every Sīpa piece has a registry number for life, such as PTN-MT-26-0142. Enter a number to see the piece, its maker and its record.',
+  alternates: { canonical: '/registry' },
+};
 
 const PLACES: [string, string][] = [
   ['PTN', 'Patan (Lalitpur)'],

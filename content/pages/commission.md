@@ -2,7 +2,7 @@
 id: commission
 route: /commission
 status: ready
-title: Request a piece
+title: "Commission handmade art from Nepal"
 seo:
   title: Request a piece · Sīpa
   description: Ask for a statue, thangka, painting or carving made for you. Tell us the craft, subject, size and budget. A maker replies with a design, price and time.

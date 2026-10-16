@@ -40,5 +40,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...Object.keys(getCareGuides()).map((c) => paths.care(c)),
     ...getPosts().map((p) => paths.journal(p.slug)),
   ];
-  return urls.map((u) => ({ url: `${BASE}${u}` }));
+  const lastModified = new Date();
+  return urls.map((u) => ({ url: `${BASE}${u}`, lastModified, priority: u === '/' ? 1 : u.split('/').length <= 2 ? 0.8 : 0.6 }));
 }

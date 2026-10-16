@@ -2,7 +2,7 @@
 id: about
 route: /about
 status: needs-input
-title: Our promise
+title: "Our promise: named makers and a record for life"
 seo:
   title: Our promise · Sīpa
   description: Sīpa sells art made by hand across Nepal on three promises. Each piece is explained, each maker named and paid a fair share, each piece recorded.

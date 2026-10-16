@@ -1,6 +1,6 @@
 # Sīpa
 
-> Sīpa (सीप, "skill") sells one-of-a-kind statues, thangkas, Mithila paintings, and wood, stone and metal work made by named makers across Nepal. Every piece has a registry number for life (for example PTN-MT-26-0142). Every piece page states, in Nepali rupees, how much of the price goes to the maker's workshop. Every piece ships cleared for export, with a printed catalogue card and a care kit for its material.
+> Sīpa sells one-of-a-kind statues, thangkas, Mithila paintings, and wood, stone and metal work made by named makers across Nepal. Every piece has a registry number for life (for example PTN-MT-26-0142). Makers are paid a fair share of every sale, enough to sustain their livelihood. Prices are set in Nepali rupees and shown in US dollars by default. Every piece ships cleared for export, with a printed catalogue card and a care kit for its material.
 
 Key facts:
 - A registry number has four parts: place made (PTN Patan, BKT Bhaktapur, KTM Kathmandu, JNK Janakpur, LMB Lumbini, PKR Pokhara), craft (MT metal, ST stone, WD wood, TK thangka, MH Mithila, PP paper and other), two-digit year finished, and a serial that is never reused.
@@ -9,11 +9,11 @@ Key facts:
 - "Made in Lumbini" is used only for pieces made in Lumbini. Buddha figures made elsewhere in Nepal are described as "From the land of the Buddha's birth".
 
 ## Crafts
-- [Lost-wax casting](https://sipa.example/crafts/lost-wax-casting): how Newar metalworkers in Patan cast and gild statues
+- [Lost-wax casting](https://sipa.example/crafts/lost-wax-casting): making metal objects from a wax model, a clay mould and molten metal, as practised by Newar families in Patan
 - [Thangka painting](https://sipa.example/crafts/thangka-painting): mineral pigment and gold on cotton, drawn on a proportion grid
-- [Mithila painting](https://sipa.example/crafts/mithila-painting): painting by women in and around Janakpur
-- [Newar woodcarving](https://sipa.example/crafts/newar-woodcarving): carved windows, struts and figures from the Kathmandu Valley
-- [Stone carving](https://sipa.example/crafts/stone-carving): figures cut by hammer and chisel
+- [Mithila painting](https://sipa.example/crafts/mithila-painting): the folk painting of the Mithila region of Nepal and India, centred on Janakpur in Nepal
+- [Newar woodcarving](https://sipa.example/crafts/newar-woodcarving): carved windows, doors, struts and pillars of the Kathmandu Valley
+- [Stone carving](https://sipa.example/crafts/stone-carving): stone shaped by hammer and chisel into architecture, relief and figures
 
 ## Meaning
 - [The mudras](https://sipa.example/meaning/mudras): the Buddha's hand gestures and what they mean
@@ -30,6 +30,10 @@ Key facts:
 ## Places and makers
 - [Places](https://sipa.example/places): Patan, Bhaktapur, Kathmandu, Janakpur, Lumbini
 - [Makers](https://sipa.example/makers)
+
+## Behind the scenes and requests
+- [Behind the scenes](https://sipa.example/behind-the-scenes): how pieces are documented, and the community discussions behind the work
+- [Request a piece](https://sipa.example/commission): ask for a piece to be made to order
 
 ## How Sīpa works
 - [Our promise](https://sipa.example/about)

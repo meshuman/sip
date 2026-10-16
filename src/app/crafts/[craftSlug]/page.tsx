@@ -5,7 +5,15 @@ import { PieceGrid } from '@/components/piece/PieceCard';
 import { ChapterHeader } from '@/components/ui/ChapterHeader';
 import { Crumbs } from '@/components/ui/Crumbs';
 import { MAKERS, PIECES } from '@/lib/catalog';
+import { JsonLd } from '@/components/ui/JsonLd';
+import { PIECE_PHOTOS } from '@/data/photos';
 import { getCrafts } from '@/lib/content';
+import { abs, articleLd, trimDesc } from '@/lib/seo';
+
+const craftPhoto = (slug: string) => {
+  const piece = PIECES.find((x) => x.craft === slug);
+  return piece ? PIECE_PHOTOS[piece.id] : undefined;
+};
 
 type Params = { params: Promise<{ craftSlug: string }> };
 
@@ -13,7 +21,15 @@ export const generateStaticParams = () => Object.keys(getCrafts()).map((craftSlu
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const c = getCrafts()[(await params).craftSlug];
-  return c ? { title: c.name, description: c.description ?? c.definition } : {};
+  if (!c) return {};
+  const img = craftPhoto(c.slug);
+  const description = trimDesc(c.description ?? c.definition);
+  return {
+    title: `${c.name}: how it is made`,
+    description,
+    alternates: { canonical: `/crafts/${c.slug}` },
+    openGraph: { type: 'article', title: c.name, description, ...(img ? { images: [{ url: abs(img), alt: c.name }] } : {}) },
+  };
 }
 
 export default async function CraftPage({ params }: Params) {
@@ -25,6 +41,15 @@ export default async function CraftPage({ params }: Params) {
   const n = c.stages.length;
   return (
     <>
+      <JsonLd
+        data={articleLd({
+          headline: `${c.name}: how it is made`,
+          description: c.definition,
+          path: `/crafts/${c.slug}`,
+          image: craftPhoto(c.slug),
+          about: { name: c.name, description: c.definition },
+        })}
+      />
       <Crumbs items={[['Home', '/'], ['Learn', '/crafts'], [c.name]]} />
       <section className="sec-top wrap">
         <ChapterHeader as="h1" label="Crafts" heading={c.name} lead={c.definition} />

@@ -2,7 +2,7 @@
 id: behind
 route: /behind-the-scenes
 status: sample
-title: Behind the scenes
+title: "Behind the scenes: how we document the work"
 seo:
   title: Behind the scenes · Sīpa
   description: The stories, incidents, initiatives and teamwork behind documenting each piece, and the community discussions that shape how we work.
